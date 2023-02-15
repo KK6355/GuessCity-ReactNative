@@ -12,7 +12,7 @@ import { quizData } from "../../assets/data";
 import SelectDropdown from "react-native-select-dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 function Game() {
   const [selectedCity, setSelectedCity] = useState("");
@@ -84,7 +84,10 @@ function Game() {
           </Text>
         </Pressable>
         <View style={styles.country}>
-          <Text style={{ fontSize: 30, color: "#fff" }}>{getCountryDate}</Text>
+          <Text style={{ fontSize: 30, color: "#fff" }}>
+            <FontAwesomeIcon icon={faGlobe} color={"#FFB703"} size={30} />
+            &nbsp;{getCountryDate}
+          </Text>
           {/* <Text>{getCityData}</Text> */}
         </View>
       </View>
@@ -92,8 +95,8 @@ function Game() {
       {getCountryDate && (
         <View style={styles.selectContainer}>
           <View>
-            <Text style={{ fontSize: 16, color: "#fff" }}>
-              Select the capital city:
+            <Text style={{ fontSize: 16, color: "#fff", textAlign: "center" }}>
+              Select the capital city
             </Text>
           </View>
           <View style={styles.dropdown}>
