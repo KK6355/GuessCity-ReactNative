@@ -32,6 +32,16 @@ const DbList = () => {
     );
   }
 
+  const deleteAll = () => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "DELETE FROM cities ",
+        setCities([]),
+        console.log("deleted data"),
+        (txObj, error) => console.log(error)
+      );
+    });
+  };
   const getCity = () => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -46,12 +56,6 @@ const DbList = () => {
         (txObj, resultSet) => setCities(resultSet.rows._array),
         console.log("fetch table")
       ),
-        (txObj, error) => console.error(error);
-    });
-  };
-  const deleteAll = () => {
-    db.transaction((tx) => {
-      tx.executeSql("DELETE * FROM cities", console.log("delete all data")),
         (txObj, error) => console.error(error);
     });
   };
