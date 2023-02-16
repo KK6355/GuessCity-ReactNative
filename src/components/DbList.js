@@ -1,6 +1,14 @@
 import * as SQLite from "expo-sqlite";
 import { useEffect, useState } from "react";
-import { View, Text, Button, TextInput, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  ScrollView,
+} from "react-native";
 
 const DbList = () => {
   const db = SQLite.openDatabase("guessCityDB.db");
@@ -80,16 +88,25 @@ const DbList = () => {
     return cities.map((city, index) => {
       return (
         <View key={index} style={styles.row}>
-          <Text style={{ color: "#fff" }}>{city.city}</Text>
-          <Button title="Delete" onPress={() => deleteCity(city.id)} />
+          <Text style={styles.cityListText}>{city.city}</Text>
+          <Pressable
+            onPress={() => deleteCity(city.id)}
+            style={styles.deleteOnePre}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Delete</Text>
+          </Pressable>
         </View>
       );
     });
   };
   return (
     <View style={styles.container}>
-      <Button title="Refresh Cities Data" onPress={getCity} />
-      <Button title="Delete All Cities" onPress={deleteAll} />
+      <Pressable onPress={getCity} style={styles.refreshPre}>
+        <Text style={{ color: "#fff", fontSize: 25 }}>Refresh Cities Data</Text>
+      </Pressable>
+      <Pressable onPress={deleteAll} style={styles.deletePre}>
+        <Text style={{ color: "#fff", fontSize: 25 }}>Delete All Cities</Text>
+      </Pressable>
       {showCities()}
     </View>
   );
@@ -98,7 +115,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#023047",
   },
   row: {
@@ -106,6 +122,44 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     margin: 8,
+  },
+  refreshPre: {
+    alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: "#219EBC",
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderColor: "#fff",
+    borderRadius: 10,
+    margin: 20,
+    width: 300,
+  },
+  deletePre: {
+    alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: "#FB8500",
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderColor: "#fff",
+    borderRadius: 10,
+    margin: 20,
+    width: 300,
+  },
+  deleteOnePre: {
+    alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: "#FFB703",
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderColor: "#fff",
+    borderRadius: 10,
+    width: 100,
+  },
+  cityListText: {
+    color: "#fff",
+    padding: 5,
+    margin: 5,
+    textAlign: "left",
   },
 });
 
