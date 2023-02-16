@@ -1,4 +1,5 @@
 # GuessCity-ReactNative
+## All the packages info can be found in the json file, the way to connect to database is expo SQLite.
 ## Play a guess city game
 ![game1](https://user-images.githubusercontent.com/93057655/219278581-11459de9-10db-4ff4-82d6-78192121c5d6.png)
 ## If the answer is correct, modal shows up, score +1
