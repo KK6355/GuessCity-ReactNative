@@ -103,7 +103,7 @@ function Game() {
     <View style={styles.container}>
       <View style={styles.questionContainer}>
         <Pressable onPress={getCountryHandler} style={styles.getCountryPress}>
-          <Text style={{ fontSize: 16, color: "#fff" }}>
+          <Text style={{ fontSize: 20, color: "#fff" }}>
             Get A Random Country
           </Text>
         </Pressable>
@@ -151,7 +151,7 @@ function Game() {
                 data={getCorrectList}
                 renderItem={(itemDate) => (
                   <View>
-                    <Text style={{ fontSize: 12, color: "#8ECAE6" }}>
+                    <Text style={{ fontSize: 16, color: "#8ECAE6" }}>
                       {itemDate.item.text}
                     </Text>
                   </View>
@@ -169,7 +169,7 @@ function Game() {
                 data={getWrongList}
                 renderItem={(itemDate) => (
                   <View>
-                    <Text style={{ fontSize: 12, color: "#FB8500" }}>
+                    <Text style={{ fontSize: 16, color: "#FB8500" }}>
                       {itemDate.item.text}
                     </Text>
                   </View>
@@ -258,12 +258,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#023047",
   },
   questionContainer: {
-    flex: 5,
+    flex: 6,
     justifyContent: "center",
     alignItems: "center",
   },
   selectContainer: {
-    flex: 1,
+    flex: 2,
     margin: 20,
   },
   resultContainer: {
@@ -272,12 +272,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
-    paddingRight: 80,
-    paddingLeft: 80,
-    borderColor: "white",
-    borderRadius: 5,
+    width: 300,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderColor: "#fff",
+    borderRadius: 10,
   },
-  listContainer: { flex: 2, flexDirection: "row", margin: 10 },
+  listContainer: { flex: 4, flexDirection: "row", margin: 10, width: 300 },
   correctListContainer: { flex: 1, margin: 20 },
   wrongListContainer: { flex: 1, margin: 20 },
   getCountryPress: {
@@ -286,8 +287,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#219EBC",
     marginTop: 30,
-    paddingRight: 50,
-    paddingLeft: 50,
+    width: 300,
+    paddingTop: 15,
+    paddingBottom: 15,
+    borderColor: "#fff",
+    borderRadius: 10,
   },
   country: {
     flex: 6,
