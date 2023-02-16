@@ -13,6 +13,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import * as SQLite from "expo-sqlite";
 
 function Game() {
   const [selectedCity, setSelectedCity] = useState("");
@@ -30,6 +31,9 @@ function Game() {
   const coutryCount = sortedData.length;
   const cityData = sortedData.map((obj) => obj.Capital);
   const sortedCityData = [...cityData].sort();
+  // database
+  const db = SQLite.openDatabase("guessCityDB.db");
+  const [cities, setCities] = useState([]);
 
   let randomDataObj = {
     key: 1,
@@ -71,10 +75,30 @@ function Game() {
         { text: selectedItem, id: Math.random().toString() },
       ]);
       setWrongModalVisible(true);
+
+      // AddData(selectedItem);
     }
   }
-
-  // console.log(getWrongList[0].text);
+  useEffect(() => {
+    db.transaction((tx) => {
+      if (selectedCity) {
+        tx.executeSql(
+          "INSERT INTO cities (city) values (?)",
+          [selectedCity],
+          (txObj, resultSet) => {
+            let existingCities = [...cities];
+            existingCities.push({ id: resultSet.insertId, city: selectedCity });
+            setCities(existingCities);
+          },
+          console.log("added data"),
+          (txObj, error) => console.log(error)
+        );
+      } else {
+        console.log("null value can not be added into database");
+      }
+    });
+    console.log(`city added to db: ${selectedCity}`);
+  }, [getWrongList]);
   return (
     <View style={styles.container}>
       <View style={styles.questionContainer}>
